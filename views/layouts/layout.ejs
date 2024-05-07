@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include("../partials/head") %>
-<body class="h100">
-  <div id="wrapper" class="df fdc" style="min-height:100vh">
-    <%- include("../partials/header") %>
-    <%- include("../partials/navigation") %>
-    <main class="f-1">
-      <%- body %>
-    </main>
+<body>
+  <div id="wrapper" class="flex flex-col h-screen bg-white max-w-[1280px] m-0a px-3 border-2 border-solid border-[black]">
+    <div class="f-1">
+      <%- include("../partials/header") %>
+      <%- include("../partials/navigation") %>
+      <main class="">
+        <%- body %>
+      </main>
+    </div>
     <%- include("../partials/footer") %>
   </div>
   
