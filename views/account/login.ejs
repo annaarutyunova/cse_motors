@@ -1,0 +1,39 @@
+<!-- A content heading -->
+<% if (title) { %>
+  <h1 class="mt-6 text-xl"><%- title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+<!-- A message -->
+<%- messages() %>
+
+<!-- The login view -->
+<form id="loginForm" class="mt-6" action="/account/login" method="post">
+  <label for="account_email" class="regular">Email:*</label><br>
+  <input type="email" class="regular border" placeholder="Enter a valid email address" id="account_email" name="account_email" required value="<%= locals.account_email %>"><br>
+  <label for="account_password">Password:</label> 
+  <p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p> 
+  <div class="flex">
+    <input type="password" name="account_password" id="account_password" class="" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><img class="h-[20px] object-cover" style="margin: auto 0" id="showPassword" src="../images/visibility_off_24dp_FILL0_wght400_GRAD0_opsz24.png"></img>
+  </div>  
+  <br>
+  <button type="submit" id="loginButton" class="regular bg-black text-white mt-3 py-2 px-4 mb-2">Log in</button>
+  <p class="regular">No account? <a href="/account/register" class="semi-bold">Sign-up</a></p>
+</form>
+<script>
+  const showPassword = document.getElementById('showPassword');
+  showPassword.addEventListener('click', () => {
+    const account_password = document.getElementById('account_password');
+    const type = account_password.getAttribute('type');
+    if(type == "password") {
+      account_password.setAttribute("type", "text");
+      showPassword.src = "../images/visibility_24dp_FILL0_wght400_GRAD0_opsz24.png";
+    } else {
+      account_password.setAttribute("type", "password");
+      showPassword.src = "../images/visibility_off_24dp_FILL0_wght400_GRAD0_opsz24.png";
+    }
+  })
+</script>
+
+
+

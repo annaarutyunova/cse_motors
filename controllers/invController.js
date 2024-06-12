@@ -34,4 +34,35 @@ invCont.buildById = async function (req, res, next) {
 
 }
 
+
+invCont.buildInventoryManagement = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Inventory Management",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.buildAddNewClassifictionForm = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/new-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.buildAddNewInventoryForm = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const classifications = await invModel.getClassifications()
+  let select = await utilities.selectClassification(classifications.rows)
+  res.render("./inventory/new-inventory", {
+    title: "Add New Inventory",
+    nav,
+    select,
+    errors: null
+  })
+}
+
 module.exports = invCont

@@ -1,0 +1,34 @@
+<% if (title) { %>
+  <h1 class="mt-6 text-xl mb-6"><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+
+<form id="addNewVehicleform" action="/inv/new-inventory" method="post">
+  <!-- The login view -->
+  <label class="regular">Classification:*</label><br>
+  <%- select %><br>
+  <%#- options %>
+      <label for="invMake" class="regular">Make:*</label><br>
+      <input type="text" id="invMake" minlength="3" name="inv_make" required placeholder="Min 3 characters" value="<%= locals.inv_make %>"><br>
+      <label for="invModel" class="regular">Model:*</label><br>
+      <input type="text" id="invModel" minlength="3" name="inv_model" required placeholder="Min 3 characters" value="<%= locals.inv_model %>"><br>
+      <label for="invDescription" class="regular">Description:*</label><br>
+      <textarea id="invDescription" class="regular" name="inv_description" required><%= locals.inv_description %></textarea><br>
+
+      <label for="invImage" class="regular">Image Path:*</label><br>
+      <input type="text" id="invImage" name="inv_image" required value="/images/vehicles/no-image.png" value="<%= locals.inv_make %>"><br>
+      <label for="invThumbnail" class="regular">Thumbnail Path:*</label><br>
+      <input type="text" id="invThumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required value="<%= locals.inv_thumbnail %>"><br>
+      <label for="invPrice" class="regular">Price:*</label><br>
+      <input type="text" id="invPrice" name="inv_price" pattern="^\d+([.]\d+)?$" required value="<%= locals.inv_price %>"><br>
+
+      <label for="invYear" class="regular">Year:*</label><br>
+      <input type="text" id="invYear" name="inv_year" minlength="4" maxlength="4" pattern="[0-9]{4}" required value="<%= locals.inv_year %>"><br>
+      <label for="invMiles" class="regular">Miles:*</label><br>
+      <input type="text" id="invMiles" name="inv_miles" pattern="[0-9]*" required value="<%= locals.inv_miles %>"><br>
+      <label for="invColor" class="regular">Color:*</label><br>
+      <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br>
+
+      <button type="submit" class="regular bg-black text-white mt-3 py-2 px-4 mb-2" id="addVehicleButton">Add Vehicle</button>
+</form>

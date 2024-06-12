@@ -73,7 +73,25 @@ Util.buildById = async function(data){
 }
 
 
-
+/* ************************
+ * Constructs select classification in form in inventory when adding new vehicle
+ ************************** */
+Util.selectClassification = async function(optionSelected){
+  let data = await invModel.getClassifications()
+  let select = "<select name='classification_id' class='semi-bold' id='classificationList'>"
+  let options = "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    options += `<option
+      value = "${row.classification_id}"
+      ${row.classification_id === Number(optionSelected)? 'selected':''}
+      >
+      ${row.classification_name}
+    </option>`
+  })
+  select += options
+  select += "</select>"
+  return select
+}
 
 
 /* ****************************************

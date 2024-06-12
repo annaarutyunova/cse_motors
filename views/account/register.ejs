@@ -1,0 +1,33 @@
+<!-- A content heading -->
+<% if (title) { %>
+  <h1 class="font-bold" id="registerTitle"><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
+<!-- A message -->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<!--action="/account/register" - the path to be processed by the route, to understand what is being requested.
+method="post" - the manner in which the data is being sent to the server.  -->
+<form id="registerForm" action="/account/register" method="post">
+<!-- The login view -->
+  <label for="account_firstname" class="regular">First Name:*</label><br>
+  <input class="" type="text" id="account_firstname" name="account_firstname" minlength="1" required value="<%= locals.account_firstname %>"><br>
+  <label for="account_lastname" class="regular">Last Name:*</label><br>
+  <input class="" type="text" id="account_lastname" name="account_lastname" minlength="1" required value="<%= locals.account_lastname %>"><br>
+  <label for="account_email" class="regular">Email address:*</label><br>
+  <input class="" type="email" id="account_email" name="account_email" required value="<%= locals.account_email %>"><br>
+  <label for="account_password" class="regular">Password:*</label><br>
+  <input class="" type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
+  <button type="submit" class="bg-black text-white mt-3 py-2 px-4 mb-3" id="registerButton">Register</button>
+  <p class="regular">Already have an account? <a href="/account/login" class="semi-bold">Log in</a></p>
+</form>
+

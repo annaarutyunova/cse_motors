@@ -2,3 +2,15 @@
 body{
   background-image:url('../images/site/checkerboard.jpg');
 }
+
+.notice{
+  margin-top: 12px;
+  color: darkgreen;
+}
+
+input, textarea, select {
+  border: 1px solid black;
+  padding: 5px;
+  min-width: 300px;
+  margin-bottom: 10px;
+}
