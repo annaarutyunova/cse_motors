@@ -4,6 +4,14 @@
     res.redirect('/')
   } %>
 
+<% if (errors) { %>
+  <ul class="notice semi-bold">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <form id="addNewVehicleform" action="/inv/new-inventory" method="post">
   <!-- The login view -->
   <label class="regular">Classification:*</label><br>

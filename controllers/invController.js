@@ -65,4 +65,76 @@ invCont.buildAddNewInventoryForm = async function(req, res, next) {
   })
 }
 
+ /* ****************************************
+*  Process Add New Classification
+* *************************************** */
+invCont.addNewClassification = async function(req, res) {
+  const { classification_name } = req.body
+
+  const newVehicleResult = await invModel.addNewClass(
+    classification_name
+  )
+  if (newVehicleResult) {
+    let nav = await utilities.getNav()
+    req.flash(
+      "success semi-bold",
+      `The ${classification_name} classification was successfully added.`
+    )
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Please provide a correct classification name.")
+    res.status(501).render("./inventory/new-classification", {
+      title: "Add Classification ",
+      nav,
+      errors
+    })
+  }
+}
+
+invCont.addNewVehicle = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, 
+    inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
+    const newVehicleResult = await invModel.addNewVehicle(
+      inv_make, 
+      inv_model, 
+      inv_description, 
+      inv_image, 
+      inv_thumbnail, 
+      inv_price, 
+      inv_year, 
+      inv_miles, 
+      inv_color,
+      classification_id
+    )
+    if (newVehicleResult) {
+      const classificationData = await invModel.getClassifications()
+      let select = await utilities.selectClassification(classificationData.rows)
+      req.flash(
+        "success semi-bold",
+        `The ${inv_make} ${inv_model} was successfully added.`
+      )
+      res.status(201).render("./inventory/management", {
+        title: "Vehicle management",
+        nav,
+        errors: null,
+        select
+      })
+    } else {
+      req.flash("notice", "Please provide correct information.")
+      res.status(501).render("./inventory/new-inventory", {
+        title: "Add Vehicle",
+        nav,
+        errors,
+        select
+      })
+    }
+}
+
+
+
 module.exports = invCont

@@ -6,6 +6,15 @@
 
 <%- messages() %>
 
+
+<% if (errors) { %>
+  <ul class="notice semi-bold">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <form action="/inv/new-classification" method="post">
   <label for="classification_name" class="semi-bold">Classification Name:*<br></label><br>
   <input type="text" class="" id="className" name="classification_name" required pattern="[A-Za-z]+" minlength="1" placeholder="Alphabetic characters only"
